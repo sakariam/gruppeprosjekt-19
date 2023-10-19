@@ -8,6 +8,7 @@ public class Guide {
     private String email;
     private String phoneNumber;
     private String description;
+    private List<rating> rate;
     private List<Tours> TourGuides;
 
     public Guide(int id, String name, String email, String phoneNumber, String description, List<Tours> tourGuides) {
@@ -28,6 +29,11 @@ public class Guide {
     public void removeTour(){
 
     }
+
+    public void addrating(){
+
+    }
+
     private void changeDescription(){
 
     }

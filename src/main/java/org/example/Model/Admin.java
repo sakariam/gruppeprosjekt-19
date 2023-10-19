@@ -12,7 +12,7 @@ public class Admin {
         this.tele_nr = tele_nr;
     }
 
-    // this will mark a guide if the many bad reviews and
+    // this will mark a guide if the many have bad reviews and
     // it can also give good mark to if guide has has many good reviews
 
     public void markguide(){

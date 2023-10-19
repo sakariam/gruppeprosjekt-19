@@ -3,7 +3,6 @@ package org.example.Model;
 import java.util.List;
 
 
-
 public class User {
     public User(int id, String username, String first_name, String last_name, List<Tours> favorite_tours) {
         this.id = id;
