@@ -1,13 +1,20 @@
 package org.example.Controller;
+import org.example.Model.Tours;
+import org.example.Repository.ToursRepository;
+
 import java.util.Scanner;
 
 public class Controller {
     //Make repository variables. eks. private GuideRepository guideRepository
+    private ToursRepository toursRepository;
 
     //Make constructor with all the repository variables
-
+    public Controller(ToursRepository toursRepository){
+        this.toursRepository = toursRepository;
+    }
 
     public Controller() {
+
     }
 
     //Gives user the choice of logging in with Admin,Guide or User
@@ -76,7 +83,7 @@ public class Controller {
 
         int guideLogin = scanner.nextInt();
         switch (guideLogin) {
-            case 1 -> {//addTour() ;
+            case 1 -> {createTour();
             }
             case 2 -> {//removeTour();
             }
@@ -90,6 +97,32 @@ public class Controller {
             }
             default -> System.out.println("Input not recognised, please try again");
         }
+    }
+    public void createTour(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Creating a new Tour");
+
+        //Get all the variables for making a tour
+        System.out.println("Enter the name/title of your tour");
+        String name = scanner.nextLine();
+
+        System.out.println("Enter the description");
+        String description = scanner.nextLine();
+
+        System.out.println("Enter the price");
+        Double price = scanner.nextDouble();
+
+        System.out.println("Enter how many people can join");
+        int capacity = scanner.nextInt();
+
+        Tours newTour = new Tours(name,description,price,capacity);
+
+        toursRepository.addTour(newTour);
+
+        System.out.println("Success!");
+        guideLogin();
+
+
     }
 
     public void userLogin() {

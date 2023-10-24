@@ -11,28 +11,36 @@ import java.util.List;
 
 
 public class ToursJSONRepository implements ToursRepository {
+    private final String filename;
     private ArrayList<Tours> tours = new ArrayList<>();
 
 
-    public ToursJSONRepository(String filename){
-        tours.addAll(readJsonFile(filename));
+    public ToursJSONRepository(String filename) {
+        this.filename = filename;
+        List<Tours> existingTours = readJsonFile(filename);
+        if (existingTours != null) {
+            tours.addAll(existingTours);
+        }
     }
 
     public List<Tours> readJsonFile(String filename) {
-        List<Tours> ToursList = new ArrayList<>();
+        List<Tours> toursList = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Tours[] list = objectMapper.readValue(new File(filename), Tours[].class);
+            File file = new File(filename);
 
-            ToursList = Arrays.asList(list);
+            if (file.exists() && file.length() > 0) {
+                Tours[] list = objectMapper.readValue(file, Tours[].class);
+                toursList = Arrays.asList(list);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
-
         }
-        return ToursList;
+        return toursList.isEmpty() ? null : toursList;
     }
+
     public static void writeToJson(String filename, List<Tours> tours){
         File file = new File(filename);
 
@@ -44,6 +52,12 @@ public class ToursJSONRepository implements ToursRepository {
             e.printStackTrace();
         }
 
+    }
+    @Override
+    public void addTour(Tours tour){
+        tours.add(tour);
+
+        writeToJson("src/data/tour.json",tours);
     }
 
 
