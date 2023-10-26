@@ -25,9 +25,19 @@ public class User {
 
 
 
-    public void makeProfile(){
+    public String makeProfile(){
+        String profile= "Username: " + username + "\n";
+        profile +="first-name: " + first_name + "\n";
+        profile += "last-name: " + last_name + "\n";
+
+        return profile;
 
     }
+
+    public void purchase(){
+
+    }
+
     public void deleteProfile(){
 
     }
