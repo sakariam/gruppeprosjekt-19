@@ -1,8 +1,8 @@
 package org.example.Repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Model.Tours;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,12 +53,29 @@ public class ToursJSONRepository implements ToursRepository {
         }
 
     }
+
+
+
     @Override
     public void addTour(Tours tour){
         tours.add(tour);
 
         writeToJson("src/data/tour.json",tours);
     }
+    @Override
+    public void delTour(int index) {
+        if (index >= 0 && index < tours.size()) {
+            tours.remove(index);
+            writeToJson(filename, tours);
+        }
+    }
+
+    @Override
+    public ArrayList<Tours> getAllTours(){
+        return tours;
+
+    }
+
 
 
 }

@@ -2,6 +2,7 @@ package org.example.Controller;
 import org.example.Model.Tours;
 import org.example.Repository.ToursRepository;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Controller {
@@ -13,9 +14,6 @@ public class Controller {
         this.toursRepository = toursRepository;
     }
 
-    public Controller() {
-
-    }
 
     //Gives user the choice of logging in with Admin,Guide or User
     public void login() {
@@ -42,7 +40,7 @@ public class Controller {
         }
 
     }
-
+    //Login for admin
     public void adminLogin() {
         Scanner scanner = new Scanner(System.in);
 
@@ -70,25 +68,25 @@ public class Controller {
             default -> System.out.println("Input not recognised, please try again");
         }
     }
-
+    //Login for guides
     public void guideLogin() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("***Guide Menu***");
         System.out.println("Press <1> to add a tour");
-        System.out.println("Press <2> to remove a tour");
-        System.out.println("Press <3> to list of your tours");
+        System.out.println("Press <2> to display all tours");
+        System.out.println("Press <3> to remove a tour");
         System.out.println("Press <4> to go back to login menu");
         System.out.println("Press <5> to exit application");
 
         int guideLogin = scanner.nextInt();
         switch (guideLogin) {
-            case 1 -> {createTour();
-            }
-            case 2 -> {//removeTour();
-            }
-            case 3 -> {//tourList();
-            }
+            case 1 -> createTour();
+
+            case 2 -> displayTours();
+
+            case 3 -> delTour();
+
             case 4 -> login();
             case 5 -> {
                 System.out.println("Thank you for choosing us, see you next time !");
@@ -96,8 +94,11 @@ public class Controller {
                 System.exit(0);
             }
             default -> System.out.println("Input not recognised, please try again");
+
+
         }
     }
+    //Creates a tour and puts it in json
     public void createTour(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Creating a new Tour");
@@ -110,7 +111,7 @@ public class Controller {
         String description = scanner.nextLine();
 
         System.out.println("Enter the price");
-        Double price = scanner.nextDouble();
+        double price = scanner.nextDouble();
 
         System.out.println("Enter how many people can join");
         int capacity = scanner.nextInt();
@@ -125,6 +126,77 @@ public class Controller {
 
     }
 
+    //Shoes a list of all the tours
+    public void displayTours(){
+        ArrayList<Tours> allTours = toursRepository.getAllTours();
+
+        if (allTours.isEmpty()) {
+            System.out.println("No tours available.\n");
+        } else {
+            System.out.println("List of Tours:");
+            for (Tours tour : allTours) {
+                System.out.println("Title: " + tour.getTitle());
+                System.out.println("Description: " + tour.getDescription());
+                System.out.println("Price: " + tour.getPrice());
+                System.out.println("Capacity: " + tour.getCapacity());
+                System.out.println();
+            }
+        }
+        System.out.println("Press <1> to go back");
+        Scanner scanner = new Scanner(System.in);
+
+        while (true){
+            String input = scanner.nextLine();
+
+            if (input.equals("1")){
+                guideLogin();
+                break;
+            }
+
+        }
+        scanner.close();
+    }
+
+    //Gives guide a choice to delete a tour
+    public void delTour() {
+        ArrayList<Tours> tours = toursRepository.getAllTours();
+        if (tours.isEmpty()) {
+            System.out.println("No tours available.");
+            guideLogin();
+        }
+
+        System.out.println("Available Tours:");
+        for (int i = 0; i < tours.size(); i++) {
+            System.out.println((i + 1) + ". " + tours.get(i).getTitle());
+        }
+
+        System.out.println("Enter the number of the tour to delete (0 to cancel):");
+        int choice = getUserChoice(tours.size());
+
+        if (choice > 0) {
+            toursRepository.delTour(choice - 1);
+            System.out.println("Tour deleted.");
+            guideLogin();
+        } else {
+            System.out.println("Operation canceled.");
+            guideLogin();
+        }
+    }
+    //Gets user input to see if it is valid
+    private int getUserChoice(int max) {
+        Scanner scanner = new Scanner(System.in);
+        int choice = -1;
+        while (choice < 0 || choice > max) {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+        return choice;
+    }
+
+    // Login for user
     public void userLogin() {
         Scanner scanner = new Scanner(System.in);
 
