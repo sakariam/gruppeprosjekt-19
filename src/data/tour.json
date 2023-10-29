@@ -1,6 +1,19 @@
 [ {
-  "title" : "fdsafdsaf",
-  "description" : "fdsafdsaf",
-  "price" : 432.0,
-  "capacity" : 321
+  "name" : "fdsfds",
+  "description" : "fdsafdsa",
+  "tourGuides" : [ {
+    "title" : "afdsafdsa",
+    "description" : "fdsafdsa",
+    "price" : 32.0,
+    "capacity" : 432423
+  }, {
+    "title" : "fdsafdsa",
+    "description" : "fdasfads",
+    "price" : 32.0,
+    "capacity" : 432423
+  } ]
+}, {
+  "name" : "dsafdsa",
+  "description" : "dsafdsafds",
+  "tourGuides" : [ ]
 } ]
