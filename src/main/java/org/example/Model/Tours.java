@@ -1,9 +1,5 @@
 package org.example.Model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class Tours {
     private String title;
     private String description;

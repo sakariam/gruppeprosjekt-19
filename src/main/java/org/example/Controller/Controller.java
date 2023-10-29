@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-    //Make repository variables. eks. private GuideRepository guideRepository
     private ToursRepository toursRepository;
     private GuideRepository guideRepository;
     public List<Guide> guides;
