@@ -1,21 +1,27 @@
 package org.example.Controller;
+import org.example.Model.Guide;
 import org.example.Model.Tours;
+import org.example.Repository.GuideRepository;
 import org.example.Repository.ToursRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-    //Make repository variables. eks. private GuideRepository guideRepository
     private ToursRepository toursRepository;
+    private GuideRepository guideRepository;
+    public List<Guide> guides;
 
     //Make constructor with all the repository variables
-    public Controller(ToursRepository toursRepository){
+    public Controller(ToursRepository toursRepository, GuideRepository guideRepository){
         this.toursRepository = toursRepository;
+        this.guideRepository = guideRepository;
+        this.guides = guideRepository.getAllGuides();
     }
 
 
-    //Gives user the choice of logging in with Admin,Guide or User
+    //Gives user the choice of logging in as Admin,Guide or User
     public void login() {
         Scanner scanner = new Scanner(System.in);
 
@@ -40,10 +46,11 @@ public class Controller {
         }
 
     }
-    //Login for admin
+    //Method that logs into admin
     public void adminLogin() {
         Scanner scanner = new Scanner(System.in);
 
+        //Admin Menu
         System.out.println("***Admin Menu***");
         System.out.println("Press <1> to add a guide");
         System.out.println("Press <2> to remove a guide");
@@ -53,26 +60,135 @@ public class Controller {
 
         int adminChoice = scanner.nextInt();
         switch (adminChoice) {
-            case 1 -> {//addGuide();
-            }
-            case 2 -> {//removeGuide();
-            }
-            case 3 -> {//guideList();
-            }
+            case 1 -> addGuide();
+
+            case 2 -> deleteGuide();
+
+            case 3 -> showAllGuides();
+
             case 4 -> login();
             case 5 -> {
-                System.out.println("Thank you for choosing us, see you next time !");
+                System.out.println("See you next time !");
                 scanner.close();
                 System.exit(0);
             }
             default -> System.out.println("Input not recognised, please try again");
         }
     }
-    //Login for guides
+    // Method to add a new guide
+    public void addGuide() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the username for the new guide");
+        String username = scanner.nextLine();
+
+        System.out.println("Enter the description for the new guide");
+        String description = scanner.nextLine();
+
+        Guide newGuide = new Guide(username, description, new ArrayList<>());
+        guideRepository.addGuide(newGuide);
+
+        System.out.println("New guide added successfully!");
+        adminLogin();
+    }
+    // Method to delete a guide
+    public void deleteGuide() {
+        ArrayList<Guide> guides = guideRepository.getAllGuides();
+        if (guides.isEmpty()) {
+            System.out.println("No guides available.");
+            adminLogin();
+        }
+
+        System.out.println("Available Guides:");
+        for (int i = 0; i < guides.size(); i++) {
+            System.out.println((i + 1) + ". " + guides.get(i).getName());
+        }
+
+        System.out.println("Enter the number of the guide to delete (0 to cancel):");
+        int choice = getUserChoice(guides.size());
+
+        if (choice > 0) {
+            guideRepository.delGuide(choice - 1);
+            System.out.println("Guide and their tours deleted.");
+            adminLogin();
+        } else {
+            System.out.println("Operation canceled.");
+            adminLogin();
+        }
+    }
+    // Method to display a list of all guides and their tours
+    public void showAllGuides() {
+        ArrayList<Guide> allGuides = guideRepository.getAllGuides();
+
+        if (allGuides.isEmpty()) {
+            System.out.println("No guides available.\n");
+        } else {
+            System.out.println("List of Guides:");
+            for (Guide guide : allGuides) {
+                System.out.println("Guide name: " + guide.getName());
+                System.out.println("Description: " + guide.getDescription());
+                System.out.println("\nTours:\n");
+                for (Tours tour : guide.getTourGuides()) {
+                    System.out.println("Tour title: " + tour.getTitle());
+                    System.out.println("Description: " + tour.getDescription());
+                    System.out.println("Price: " + tour.getPrice());
+                    System.out.println("Capacity: " + tour.getCapacity()+"\n");
+                }
+            }
+        }
+        System.out.println("\nPress <1> to go back");
+        Scanner scanner = new Scanner(System.in);
+
+        while (true){
+            String input = scanner.nextLine();
+
+            if (input.equals("1")){
+                adminLogin();
+                break;
+            }
+
+        }
+        scanner.close();
+    }
+
+    //Method that makes user choose which guide to log in as
     public void guideLogin() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("***Guide Menu***");
+        if(guides.isEmpty()){
+            System.out.println("No guides available\n");
+            login();
+        }else {
+            System.out.println("Select a guide to log in:");
+            for (int i = 0; i < guides.size(); i++) {
+                System.out.println((i + 1) + ". " + guides.get(i).getName());
+            }
+            System.out.println("Press <0> to go back to the main menu");
+            System.out.println("Press <5> to exit application");
+
+            int guideChoice = scanner.nextInt();
+
+            if (guideChoice == 0) {
+                login();
+            } else if (guideChoice >= 1 && guideChoice <= guides.size()) {
+                Guide selectedGuide = guides.get(guideChoice - 1);
+                guideMenu(selectedGuide);
+            } else if (guideChoice == 5) {
+                System.out.println("See you next time!");
+                scanner.close();
+                System.exit(0);
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+                guideLogin();
+            }
+        }
+    }
+    // Method that lets user choose to add, remove or display tour
+    public void guideMenu(Guide guide) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("***Guide Menu for " + guide.getName() + "***");
         System.out.println("Press <1> to add a tour");
         System.out.println("Press <2> to display all tours");
         System.out.println("Press <3> to remove a tour");
@@ -81,11 +197,11 @@ public class Controller {
 
         int guideLogin = scanner.nextInt();
         switch (guideLogin) {
-            case 1 -> createTour();
+            case 1 -> createTour(guide);
 
-            case 2 -> displayTours();
+            case 2 -> displayTours(guide);
 
-            case 3 -> delTour();
+            case 3 -> delTour(guide);
 
             case 4 -> login();
             case 5 -> {
@@ -99,7 +215,7 @@ public class Controller {
         }
     }
     //Creates a tour and puts it in json
-    public void createTour(){
+    public void createTour(Guide guide){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Creating a new Tour");
 
@@ -118,17 +234,20 @@ public class Controller {
 
         Tours newTour = new Tours(name,description,price,capacity);
 
+        guide.getTourGuides().add(newTour);
         toursRepository.addTour(newTour);
 
+        guideRepository.updateGuide(guide);
+
         System.out.println("Success!");
-        guideLogin();
+        guideMenu(guide);
 
 
     }
 
-    //Shoes a list of all the tours
-    public void displayTours(){
-        ArrayList<Tours> allTours = toursRepository.getAllTours();
+    //Shows a list of all the tours of the current guide
+    public void displayTours(Guide guide){
+        ArrayList<Tours> allTours = guide.getTourGuides();
 
         if (allTours.isEmpty()) {
             System.out.println("No tours available.\n");
@@ -149,7 +268,7 @@ public class Controller {
             String input = scanner.nextLine();
 
             if (input.equals("1")){
-                guideLogin();
+                guideMenu(guide);
                 break;
             }
 
@@ -158,11 +277,11 @@ public class Controller {
     }
 
     //Gives guide a choice to delete a tour
-    public void delTour() {
-        ArrayList<Tours> tours = toursRepository.getAllTours();
+    public void delTour(Guide guide) {
+        ArrayList<Tours> tours = guide.getTourGuides();
         if (tours.isEmpty()) {
             System.out.println("No tours available.");
-            guideLogin();
+            guideMenu(guide);
         }
 
         System.out.println("Available Tours:");
@@ -176,10 +295,10 @@ public class Controller {
         if (choice > 0) {
             toursRepository.delTour(choice - 1);
             System.out.println("Tour deleted.");
-            guideLogin();
+            guideMenu(guide);
         } else {
             System.out.println("Operation canceled.");
-            guideLogin();
+            guideMenu(guide);
         }
     }
     //Gets user input to see if it is valid
