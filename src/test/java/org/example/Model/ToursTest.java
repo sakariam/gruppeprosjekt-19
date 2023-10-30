@@ -14,7 +14,7 @@ class ToursTest {
         // Act
         boolean isAvailable = Tour.getCapacity()>0;
         //Assert
-        assertTrue(isAvailable,"The tour is available");
+        assertTrue(isAvailable,"The tour is savailable");
     }
     @Test
     void TourIsNotAvailable() {
