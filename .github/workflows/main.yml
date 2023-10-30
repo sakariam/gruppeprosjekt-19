@@ -1,0 +1,26 @@
+name: Gruppeprosjekt 19
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Sjekker ut koden
+      uses: actions/checkout@v4
+
+    - name: Setter opp JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        distribution: 'adopt'
+
+    - name: Bygger maven
+      run: mvn -B package --file pom.xml
+
+    - name: Kjører tester
+      run: mvn -B test --file pom.xml
