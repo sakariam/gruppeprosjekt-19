@@ -10,11 +10,20 @@ class ToursTest {
     @Test
     void TourIsAvailable() {
         // Arrange
-        Tours Tour = new Tours("Fredriksten", "Fredriksten festning", 200, 15);
+        Tours Tour = new Tours("Fredriksten", "Fredriksten festning", 200, 1);
         // Act
         boolean isAvailable = Tour.getCapacity()>0;
         //Assert
         assertTrue(isAvailable,"The tour is available");
+    }
+    @Test
+    void TourIsNotAvailable() {
+        // Arrange
+        Tours Tour = new Tours("Fredriksten", "Fredriksten festning", 200, 0);
+        // Act
+        boolean isAvailable = Tour.getCapacity()>0;
+        //Assert
+        assertFalse(isAvailable,"The tour is not available");
     }
 
     @Test
