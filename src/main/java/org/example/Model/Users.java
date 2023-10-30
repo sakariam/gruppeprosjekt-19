@@ -31,6 +31,7 @@ public class Users {
         profile +="first-name: " + first_name + "\n";
         profile += "last-name: " + last_name + "\n";
 
+
         return profile;
 
     }
@@ -68,9 +69,29 @@ public class Users {
     }
 
 
-    public void deleteProfile(){
+    public String deleteProfile(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("do you want to delete account:(Y/N) ");
+        String userdeletion = scanner.nextLine();
+
+        if (userdeletion.equals("N") || userdeletion.equals("n")) {
+            Users users = null;
+
+            return "your account is deleted";
+
+
+
+        }
+        else if(userdeletion.equals("Y") || userdeletion.equals("y")){
+            return "thanks, for staying with us";
+        }
+
+        return "your answer is confirmed.";
+
+        //scanner.close();
 
     }
+
     public void addFavoriteTour(){
 
     }
