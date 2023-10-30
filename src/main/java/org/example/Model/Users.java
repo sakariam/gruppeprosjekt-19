@@ -65,7 +65,6 @@ public class Users {
             return "booking is not confirmed. try again";
         }
 
-
     }
 
 
