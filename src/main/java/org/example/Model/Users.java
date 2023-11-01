@@ -92,12 +92,6 @@ public class Users {
 
     }
 
-    public void addFavoriteTour(){
-
-    }
-    public void removeFavoriteTour(){
-
-    }
 
     public String getUsername() {
         return username;
