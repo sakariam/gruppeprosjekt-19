@@ -11,7 +11,7 @@ public class Main {
         ToursRepository toursRepository = new ToursJSONRepository("src/data/tour.json");
         UserRepository userRepository = new UserJSONRepository("src/data/user.json");
         // TODO: 17.10.2023 Add the repositories inside the parenthesis in Controller();
-        Controller controller = new Controller(toursRepository,guideRepository);
+        Controller controller = new Controller(toursRepository,guideRepository, userRepository);
 
         controller.login();
     }

@@ -1,8 +1,10 @@
 package org.example.Controller;
 import org.example.Model.Guide;
 import org.example.Model.Tours;
+import org.example.Model.Users;
 import org.example.Repository.GuideRepository;
 import org.example.Repository.ToursRepository;
+import org.example.Repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +13,17 @@ import java.util.Scanner;
 public class Controller {
     private ToursRepository toursRepository;
     private GuideRepository guideRepository;
+    private UserRepository userRepository;
     public List<Guide> guides;
+    public List<Users> users;
 
     //Make constructor with all the repository variables
-    public Controller(ToursRepository toursRepository, GuideRepository guideRepository){
+    public Controller(ToursRepository toursRepository, GuideRepository guideRepository,UserRepository userRepository){
         this.toursRepository = toursRepository;
         this.guideRepository = guideRepository;
+        this.userRepository = userRepository;
         this.guides = guideRepository.getAllGuides();
+        this.users = userRepository.getAllUsers();
     }
 
 
@@ -29,7 +35,7 @@ public class Controller {
         System.out.println("Press <1> for Admin");
         System.out.println("Press <2> for Guide");
         System.out.println("Press <3> for User");
-        System.out.println("Press <4> to exit applicatin");
+        System.out.println("Press <4> to exit application");
 
         int loginChoice = scanner.nextInt();
 
@@ -320,29 +326,85 @@ public class Controller {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("***User Menu***");
-        System.out.println("Press <1> to Tours available");
-        System.out.println("Press <2> to remove a tour");
-        System.out.println("Press <3> to see balance");
-        System.out.println("Press <4> to go back to login menu");
-        System.out.println("Press <5> to exit application");
+        if (users.isEmpty()) {
+            System.out.println("No users available\n");
+            login();
+        } else {
+            System.out.println("Select a user to log in:");
+            for (int i = 0; i < users.size(); i++) {
+                System.out.println((i + 1) + ". " + users.get(i).getUsername());
+            }
+            System.out.println("Press <0> to go back to the main menu");
+            System.out.println("Press <5> to exit application");
 
-        int userChoice = scanner.nextInt();
-        switch (userChoice) {
-            case 1 -> {//addTour();
+            int userChoice = scanner.nextInt();
+
+            if (userChoice == 0) {
+                login();
+            } else if (userChoice >= 1 && userChoice <= users.size()) {
+                Users selectedUser = users.get(userChoice - 1);
+                userMenu(selectedUser);
+            } else if (userChoice == 5) {
+                System.out.println("See you next time!");
+                scanner.close();
+                System.exit(0);
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+                userLogin();
             }
-            case 2 -> {//removeTour();
+        }
+        public void userMenu (Users users){
+            scanner = new Scanner(System.in);
+
+            System.out.println("***User Menu***");
+            System.out.println("Press <1> to add a new user");
+            System.out.println("Press <2> to delete a user");
+            System.out.println("Press <3> purchase booking");
+            System.out.println("Press <4> find your existing user");
+
+
+            int userChoice = scanner.nextInt();
+            switch (userChoice) {
+                case 1 -> addUser(users);
+
+                case 2 -> deleteUser(users);
+
+                case 3 -> purchaseBooking(users);
+
+                case 4 -> getUser(users);
+                System.out.println("Thank you for choosing us, see you next time !");
+                scanner.close();
+                System.exit(0);
+
+                default -> System.out.println("Input not recognised, please try again");
             }
-            case 3 -> {//tourList();
+            {
+            public void addUser (Users users){
+                // Adds a User object to the users list
+                users.add(users);
+                // Writes the updated user list to the JSON file
+                writeToJson(filename, users);
             }
-            case 4 -> login();
-            case 5 -> {
+        }
+    }
+
+
+
+/*
+            case 1 -> adduser();
+
+            case 2 -> deleteuser();
+
+            case 3 -> purchasebooking();
+
+            case 4 -> getuser;
+             {
                 System.out.println("Thank you for choosing us, see you next time !");
                 scanner.close();
                 System.exit(0);
             }
             default -> System.out.println("Input not recognised, please try again");
         }
-    }
-}
 
+ */
 
