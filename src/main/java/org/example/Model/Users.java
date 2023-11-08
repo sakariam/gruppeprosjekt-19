@@ -1,6 +1,7 @@
 package org.example.Model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,15 +11,17 @@ public class Users {
     private String username;
     private String first_name;
     private String last_name;
-    private List<Tours> tours;
+    private ArrayList<Users> UserLocation;
 
 
-    public Users( String username, String first_name, String last_name, List<Tours> favorite_tours) {
+    public Users( String username, String first_name, String last_name,ArrayList<Users> UserLocation) {
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.tours= tours;
+        this.UserLocation= UserLocation;
     }
+
+
 
 
     public Users() {
@@ -27,6 +30,7 @@ public class Users {
 
 
     public String makeProfile(){
+
         String profile= "Username: " + username + "\n";
         profile +="first-name: " + first_name + "\n";
         profile += "last-name: " + last_name + "\n";
@@ -117,13 +121,14 @@ public class Users {
         this.last_name = last_name;
     }
 
-    public List<Tours> getours() {
-        return tours;
+    public ArrayList<Users> getUserLocation() {
+        return UserLocation;
     }
 
-    public void setFavorite_tours(List<Tours> favorite_tours) {
-        this.tours = favorite_tours;
+    public void setUserLocation(ArrayList<Users> userLocation) {
+        UserLocation = userLocation;
     }
 }
+
 
 

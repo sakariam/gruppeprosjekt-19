@@ -353,8 +353,31 @@ public class Controller {
                 userLogin();
             }
         }
-        public void userMenu (Users users){
-            scanner = new Scanner(System.in);
+        // hello guys this is my user register and profile login
+        public void UserLog_reg() {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("***User Menu***");
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("***User Menu***");
+            System.out.println("Press <1> to make profile ");
+            System.out.println("Press <2> to to choose profile ");
+            System.out.println("Press <3> to go back to login");
+            System.out.println("Press <4> find your existing user");
+
+
+            int userChoice = scanner.nextInt();
+            switch (userChoice) {
+                case 1 -> makeprofile();
+
+                case 2 -> userLogin();
+
+
+
+        }
+        public void userMenu(Users users){
+            Scanner scanner = new Scanner(System.in);
 
             System.out.println("***User Menu***");
             System.out.println("Press <1> to add a new user");
@@ -365,26 +388,38 @@ public class Controller {
 
             int userChoice = scanner.nextInt();
             switch (userChoice) {
-                case 1 -> addUser(users);
+                case 1 -> makeprofile(users);
 
                 case 2 -> deleteUser(users);
 
                 case 3 -> purchaseBooking(users);
 
-                case 4 -> getUser(users);
+                case 4 -> login();
                 System.out.println("Thank you for choosing us, see you next time !");
                 scanner.close();
                 System.exit(0);
 
                 default -> System.out.println("Input not recognised, please try again");
             }
-            {
-            public void addUser (Users users){
-                // Adds a User object to the users list
-                users.add(users);
-                // Writes the updated user list to the JSON file
-                writeToJson(filename, users);
-            }
+
+
+            public void makeprofile() {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Enter the username for the new user");
+            String username = scanner.nextLine();
+
+            System.out.println("Enter the first name for the new user");
+            String first_name = scanner.nextLine();
+
+            System.out.println("Enter the last name name for the new user");
+            String last_name = scanner.nextLine();
+
+            Users newUsers = new Users(username, first_name, last_name, new ArrayList<>());
+            UserRepository.makeprofile(newUsers);
+
+            System.out.println("New User added successfully!");
+            UserLogin();
         }
     }
 
