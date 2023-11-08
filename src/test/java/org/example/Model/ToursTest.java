@@ -50,5 +50,26 @@ class ToursTest {
         assertEquals(200.0, tour.getPrice(), 0.001);
         assertEquals(20, tour.getCapacity());
     }
+    @Test
+    public void testEmptyConstructor() {
+        tour = new Tours();
+        assertNotNull(tour);
+
+        assertEquals(null, tour.getTitle());
+        assertEquals(null, tour.getDescription());
+        assertEquals(0.0, tour.getPrice());
+        assertEquals(0, tour.getCapacity());
+    }
+
+    @Test
+    public void testToString() {
+        tour = new Tours("OsloBy", "Guidet tur rundt Oslo", 500, 10);
+        String forventetStreng = "Tour title:OsloBy\nDescription: Guidet tur rundt Oslo\nPrice: 500.0kr";
+        String tourString = tour.toString();
+
+        // Sjekker at toString-metoden gir forventet streng
+        assertEquals(forventetStreng, tourString);
+    }
+
 
 }
