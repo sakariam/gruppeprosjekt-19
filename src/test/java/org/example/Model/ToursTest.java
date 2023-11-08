@@ -26,6 +26,17 @@ class ToursTest {
         //Assert
         assertFalse(isAvailable,"The tour is not available");
     }
+
+    @Test
+    public void testEmptyConstructor() {
+        tour = new Tours();
+        assertNotNull(tour);
+
+        assertEquals(null, tour.getTitle());
+        assertEquals(null, tour.getDescription());
+        assertEquals(0.0, tour.getPrice());
+        assertEquals(0, tour.getCapacity());
+    }
     @Test
     public void testGettersAndSetters() {
         tour = new Tours("OsloBy", "Guidet tur rundt Oslo", 500, 10);
@@ -45,16 +56,7 @@ class ToursTest {
         assertEquals(200.0, tour.getPrice(), 0.001);
         assertEquals(20, tour.getCapacity());
     }
-    @Test
-    public void testEmptyConstructor() {
-        tour = new Tours();
-        assertNotNull(tour);
 
-        assertEquals(null, tour.getTitle());
-        assertEquals(null, tour.getDescription());
-        assertEquals(0.0, tour.getPrice());
-        assertEquals(0, tour.getCapacity());
-    }
     @Test
     public void testToString() {
         tour = new Tours("OsloBy", "Guidet tur rundt Oslo", 500, 10);
