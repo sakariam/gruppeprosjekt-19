@@ -11,14 +11,12 @@ public class Users {
     private String username;
     private String first_name;
     private String last_name;
-    private ArrayList<Users> UserLocation;
 
-
-    public Users( String username, String first_name, String last_name,ArrayList<Users> UserLocation) {
+    public Users( String username, String first_name, String last_name) {
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.UserLocation= UserLocation;
+
     }
 
 
@@ -121,13 +119,6 @@ public class Users {
         this.last_name = last_name;
     }
 
-    public ArrayList<Users> getUserLocation() {
-        return UserLocation;
-    }
-
-    public void setUserLocation(ArrayList<Users> userLocation) {
-        UserLocation = userLocation;
-    }
 }
 
 

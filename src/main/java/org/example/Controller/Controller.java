@@ -18,7 +18,7 @@ public class Controller {
     public List<Users> users;
 
     //Make constructor with all the repository variables
-    public Controller(ToursRepository toursRepository, GuideRepository guideRepository,UserRepository userRepository){
+    public Controller(ToursRepository toursRepository, GuideRepository guideRepository, UserRepository userRepository) {
         this.toursRepository = toursRepository;
         this.guideRepository = guideRepository;
         this.userRepository = userRepository;
@@ -42,7 +42,7 @@ public class Controller {
         switch (loginChoice) {
             case 1 -> adminLogin();
             case 2 -> guideLogin();
-            case 3 -> userLogin();
+            case 3 -> userLog_reg();
             case 4 -> {
                 System.out.println("Thank you for choosing us, see you next time !");
                 scanner.close();
@@ -52,6 +52,7 @@ public class Controller {
         }
 
     }
+
     //Method that logs into admin
     public void adminLogin() {
         Scanner scanner = new Scanner(System.in);
@@ -81,6 +82,7 @@ public class Controller {
             default -> System.out.println("Input not recognised, please try again");
         }
     }
+
     // Method to add a new guide
     public void addGuide() {
         Scanner scanner = new Scanner(System.in);
@@ -97,6 +99,7 @@ public class Controller {
         System.out.println("New guide added successfully!");
         adminLogin();
     }
+
     // Method to delete a guide
     public void deleteGuide() {
         ArrayList<Guide> guides = guideRepository.getAllGuides();
@@ -122,6 +125,7 @@ public class Controller {
             adminLogin();
         }
     }
+
     // Method to display a list of all guides and their tours
     public void showAllGuides() {
         ArrayList<Guide> allGuides = guideRepository.getAllGuides();
@@ -138,17 +142,17 @@ public class Controller {
                     System.out.println("Tour title: " + tour.getTitle());
                     System.out.println("Description: " + tour.getDescription());
                     System.out.println("Price: " + tour.getPrice());
-                    System.out.println("Capacity: " + tour.getCapacity()+"\n");
+                    System.out.println("Capacity: " + tour.getCapacity() + "\n");
                 }
             }
         }
         System.out.println("\nPress <1> to go back");
         Scanner scanner = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             String input = scanner.nextLine();
 
-            if (input.equals("1")){
+            if (input.equals("1")) {
                 adminLogin();
                 break;
             }
@@ -162,10 +166,10 @@ public class Controller {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("***Guide Menu***");
-        if(guides.isEmpty()){
+        if (guides.isEmpty()) {
             System.out.println("No guides available\n");
             login();
-        }else {
+        } else {
             System.out.println("Select a guide to log in:");
             for (int i = 0; i < guides.size(); i++) {
                 System.out.println((i + 1) + ". " + guides.get(i).getName());
@@ -190,6 +194,7 @@ public class Controller {
             }
         }
     }
+
     // Method that lets user choose to add, remove or display tour
     public void guideMenu(Guide guide) {
         Scanner scanner = new Scanner(System.in);
@@ -220,8 +225,9 @@ public class Controller {
 
         }
     }
+
     //Creates a tour and puts it in json
-    public void createTour(Guide guide){
+    public void createTour(Guide guide) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Creating a new Tour");
 
@@ -238,7 +244,7 @@ public class Controller {
         System.out.println("Enter how many people can join");
         int capacity = scanner.nextInt();
 
-        Tours newTour = new Tours(name,description,price,capacity);
+        Tours newTour = new Tours(name, description, price, capacity);
 
         guide.getTourGuides().add(newTour);
         toursRepository.addTour(newTour);
@@ -252,7 +258,7 @@ public class Controller {
     }
 
     //Shows a list of all the tours of the current guide
-    public void displayTours(Guide guide){
+    public void displayTours(Guide guide) {
         ArrayList<Tours> allTours = guide.getTourGuides();
 
         if (allTours.isEmpty()) {
@@ -270,10 +276,10 @@ public class Controller {
         System.out.println("Press <1> to go back");
         Scanner scanner = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             String input = scanner.nextLine();
 
-            if (input.equals("1")){
+            if (input.equals("1")) {
                 guideMenu(guide);
                 break;
             }
@@ -307,6 +313,7 @@ public class Controller {
             guideMenu(guide);
         }
     }
+
     //Gets user input to see if it is valid
     private int getUserChoice(int max) {
         Scanner scanner = new Scanner(System.in);
@@ -321,7 +328,53 @@ public class Controller {
         return choice;
     }
 
-    // Login for user
+
+    // Method for creating and logging into a specific user
+    public void userLog_reg() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("***User Menu***");
+        System.out.println("Press <1> to make profile ");
+        System.out.println("Press <2> to to choose profile ");
+        System.out.println("Press <3> to go back to login");
+        System.out.println("Press <4> to exit program");
+
+
+        int userChoice = scanner.nextInt();
+        switch (userChoice) {
+            case 1 -> createProfile();
+            case 2 -> userLogin();
+            case 3 -> login();
+            case 4 -> {
+                System.out.println("See you next time !");
+                scanner.close();
+                System.exit(0);
+            }
+            default -> System.out.println("Input not recognised, please try again");
+        }
+    }
+
+    //Asks user for relevant info to create a profile
+    public void createProfile() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the username for the new user");
+        String username = scanner.nextLine();
+
+        System.out.println("Enter the first name for the new user");
+        String first_name = scanner.nextLine();
+
+        System.out.println("Enter the last name name for the new user");
+        String last_name = scanner.nextLine();
+
+        Users newUsers = new Users(username, first_name, last_name);
+        userRepository.addUser(newUsers);
+
+        System.out.println("New User added successfully!");
+        userLog_reg();
+    }
+
+    //Gets a list of users you can log in as
     public void userLogin() {
         Scanner scanner = new Scanner(System.in);
 
@@ -353,93 +406,41 @@ public class Controller {
                 userLogin();
             }
         }
-        // hello guys this is my user register and profile login
-        public void UserLog_reg() {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("***User Menu***");
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("***User Menu***");
-            System.out.println("Press <1> to make profile ");
-            System.out.println("Press <2> to to choose profile ");
-            System.out.println("Press <3> to go back to login");
-            System.out.println("Press <4> find your existing user");
-
-
-            int userChoice = scanner.nextInt();
-            switch (userChoice) {
-                case 1 -> makeprofile();
-
-                case 2 -> userLogin();
-
-
-
-        }
-        public void userMenu(Users users){
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("***User Menu***");
-            System.out.println("Press <1> to add a new user");
-            System.out.println("Press <2> to delete a user");
-            System.out.println("Press <3> purchase booking");
-            System.out.println("Press <4> find your existing user");
-
-
-            int userChoice = scanner.nextInt();
-            switch (userChoice) {
-                case 1 -> makeprofile(users);
-
-                case 2 -> deleteUser(users);
-
-                case 3 -> purchaseBooking(users);
-
-                case 4 -> login();
-                System.out.println("Thank you for choosing us, see you next time !");
-                scanner.close();
-                System.exit(0);
-
-                default -> System.out.println("Input not recognised, please try again");
-            }
-
-
-            public void makeprofile() {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("Enter the username for the new user");
-            String username = scanner.nextLine();
-
-            System.out.println("Enter the first name for the new user");
-            String first_name = scanner.nextLine();
-
-            System.out.println("Enter the last name name for the new user");
-            String last_name = scanner.nextLine();
-
-            Users newUsers = new Users(username, first_name, last_name, new ArrayList<>());
-            UserRepository.makeprofile(newUsers);
-
-            System.out.println("New User added successfully!");
-            UserLogin();
-        }
     }
 
+    //Menu for users after they log in
+    // TODO: 08.11.2023 Inne i userMenu må du la bruker velge mellom, bestille turer, se turer, slette konto, se beløpet sitt og legge til penger. Alle skal ha sin egen funksjon
+    public void userMenu(Users users) {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("***User Menu***");
+        System.out.println("Press <1> to order a tour");
+        System.out.println("Press <2> to see a list of purchased tours");
+        System.out.println("Press <3> to delete account");
+        System.out.println("Press <4> to change user account");
+        System.out.println("Press <5> to go back to login menu");
+        System.out.println("Press <6> to go exit program");
 
-/*
-            case 1 -> adduser();
+        //System.out.println("Press <3> to see your balance");
+        //System.out.println("Press <4> to add balance");
+            int userChoice = scanner.nextInt();
+            switch (userChoice) {
 
-            case 2 -> deleteuser();
+                case 1 -> { //orderTour();
+                }
+                case 2 -> { //displayTourOrders();
+                }
+                case 3 -> { //delUser();
+                }
+                case 4 -> userLogin();
+                case 5 -> login();
+                case 6 -> {
 
-            case 3 -> purchasebooking();
-
-            case 4 -> getuser;
-             {
-                System.out.println("Thank you for choosing us, see you next time !");
-                scanner.close();
-                System.exit(0);
+                    System.out.println("Thank you for choosing us, see you next time !");
+                    scanner.close();
+                    System.exit(0);
+                }
+                default -> System.out.println("Input not recognised, please try again");
             }
-            default -> System.out.println("Input not recognised, please try again");
         }
-
- */
-
+    }

@@ -71,7 +71,7 @@ public class ToursJSONRepository implements ToursRepository {
         tours.add(tour);
 
         // Writes updated tour list to JSON file
-        writeToJson("src/data/tour.json",tours);
+        writeToJson(filename,tours);
     }
 
     @Override
