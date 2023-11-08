@@ -1,5 +1,4 @@
 package org.example.Model;
-
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,9 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ToursTest {
     // TODO: 15.10.2023 Change methodn names so it describes what it is doing. And check both for true and false where you are able to 
     private Tours tour;
-
-
-
     @Test
     void TourIsAvailable() {
         // Arrange
@@ -30,7 +26,6 @@ class ToursTest {
         //Assert
         assertFalse(isAvailable,"The tour is not available");
     }
-
     @Test
     public void testGettersAndSetters() {
         tour = new Tours("OsloBy", "Guidet tur rundt Oslo", 500, 10);
@@ -60,16 +55,13 @@ class ToursTest {
         assertEquals(0.0, tour.getPrice());
         assertEquals(0, tour.getCapacity());
     }
-
     @Test
     public void testToString() {
         tour = new Tours("OsloBy", "Guidet tur rundt Oslo", 500, 10);
         String forventetStreng = "Tour title:OsloBy\nDescription: Guidet tur rundt Oslo\nPrice: 500.0kr";
         String tourString = tour.toString();
 
-        // Sjekker at toString-metoden gir forventet streng
         assertEquals(forventetStreng, tourString);
     }
-
 
 }
