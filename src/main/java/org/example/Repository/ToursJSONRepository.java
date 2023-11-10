@@ -83,5 +83,20 @@ public class ToursJSONRepository implements ToursRepository {
             writeToJson(filename, tours);
         }
     }
+    @Override
+    public List<Tours> getAllTours() {
+        return new ArrayList<>(tours);
+    }
 
+    public Tours getTour(int index) {
+        if (index >= 0 && index < tours.size()) {
+            return tours.get(index);
+        }
+        return null;
+    }
+
+    public void clearAllTours() {
+        tours.clear();
+        writeToJson(filename, tours);
+    }
 }

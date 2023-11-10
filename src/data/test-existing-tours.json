@@ -1,0 +1,11 @@
+[ {
+  "title" : "Moss",
+  "description" : "Tur rundt byen Moss",
+  "price" : 200.0,
+  "capacity" : 5
+}, {
+  "title" : "Halden",
+  "description" : "Fredriksten festning",
+  "price" : 150.0,
+  "capacity" : 15
+} ]
