@@ -2,7 +2,7 @@ package org.example.Repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Model.Users;
-
+import org.example.Model.Tours;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -128,6 +128,18 @@ public class UserJSONRepository implements UserRepository {
     @Override
     public List<Users> getAllUsers() {
         return users;
+    }
+
+    // New method to get ordered tours for a user
+    @Override
+    public List<Tours> getOrderedTours(Users user) {
+        return user.getOrderedTours();
+    }
+
+    // New method to update user information
+    @Override
+    public void updateUser(Users user) {
+        writeToJson(filename, users);
     }
 
 

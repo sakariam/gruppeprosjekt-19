@@ -82,6 +82,13 @@ public class ToursJSONRepository implements ToursRepository {
             // Writes updated list to JSON file
             writeToJson(filename, tours);
         }
+
+
+    }
+
+    @Override
+    public List<Tours> getAllTours() {
+        return null;
     }
 
 }

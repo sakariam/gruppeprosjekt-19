@@ -367,12 +367,16 @@ public class Controller {
         System.out.println("Enter the last name name for the new user");
         String last_name = scanner.nextLine();
 
-        Users newUsers = new Users(username, first_name, last_name);
+        System.out.println("Enter your tours here.");
+        List<Tours> getOrderedTours = scanner.nextLine();
+
+        Users newUsers = new Users(username, first_name, last_name,  List<Tours> getOrderedTours());
         userRepository.addUser(newUsers);
 
         System.out.println("New User added successfully!");
         userLog_reg();
     }
+
 
     //Gets a list of users you can log in as
     public void userLogin() {
@@ -426,11 +430,11 @@ public class Controller {
             int userChoice = scanner.nextInt();
             switch (userChoice) {
 
-                case 1 -> { //orderTour();
+                case 1 -> { orderTour(users);
                 }
-                case 2 -> { //displayTourOrders();
+                case 2 -> { displayTourOrders(users);
                 }
-                case 3 -> { //delUser();
+                case 3 -> { delUser(users);
                 }
                 case 4 -> userLogin();
                 case 5 -> login();
@@ -443,4 +447,91 @@ public class Controller {
                 default -> System.out.println("Input not recognised, please try again");
             }
         }
+    public void orderTour(Users user) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the available tours for the user to choose from
+        List<Tours> allTours = toursRepository.getAllTours();
+
+        if (allTours.isEmpty()) {
+            System.out.println("No tours available.\n");
+            userMenu(user);
+        } else {
+            System.out.println("Select a tour to order:");
+            for (int i = 0; i < allTours.size(); i++) {
+                System.out.println((i + 1) + ". " + allTours.get(i).getTitle());
+            }
+
+            int tourChoice = getUserChoice(allTours.size());
+
+            if (tourChoice >= 1 && tourChoice <= allTours.size()) {
+                Tours selectedTour = allTours.get(tourChoice - 1);
+                user.getOrderedTours().add(selectedTour);
+                userRepository.updateUser(user);
+
+                System.out.println("Tour ordered successfully!");
+                userMenu(user);
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+                orderTour(user);
+            }
+        }
+
+        // Method to display all ordered tours for a user
+        public void displayTourOrders (Users user){
+            List<Tours> orderedTours = user.getOrderedTours();
+
+            if (orderedTours.isEmpty()) {
+                System.out.println("No tours ordered.\n");
+            } else {
+                System.out.println("List of Ordered Tours:");
+                for (Tours tour : orderedTours) {
+                    System.out.println("Title: " + tour.getTitle());
+                    System.out.println("Description: " + tour.getDescription());
+                    System.out.println("Price: " + tour.getPrice());
+                    System.out.println("Capacity: " + tour.getCapacity());
+                    System.out.println();
+                }
+            }
+
+            System.out.println("Press <1> to go back");
+            Scanner scanner = new Scanner(System.in);
+
+            while (true) {
+                String input = scanner.nextLine();
+
+                if (input.equals("1")) {
+                    userMenu(user);
+                    break;
+                }
+            }
+            scanner.close();
+        }
+        // Method to delete a user
+        public void delUser(Users user) {
+            ArrayList<Users> allUsers = userRepository.getAllUsers();
+
+            if (allUsers.isEmpty()) {
+                System.out.println("No users available.");
+                adminLogin();
+            }
+
+            System.out.println("Available Users:");
+            for (int i = 0; i < allUsers.size(); i++) {
+                System.out.println((i + 1) + ". " + allUsers.get(i).getUsername());
+            }
+
+            System.out.println("Enter the number of the user to delete (0 to cancel):");
+            int choice = getUserChoice(allUsers.size());
+
+            if (choice > 0) {
+                userRepository.delUser(choice - 1);
+                System.out.println("User deleted.");
+                adminLogin();
+            } else {
+                System.out.println("Operation canceled.");
+                adminLogin();
+            }
+        }
+
     }
