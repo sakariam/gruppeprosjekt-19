@@ -8,4 +8,24 @@
     "price" : 32.0,
     "capacity" : 432423
   } ]
+}, {
+  "username" : "fanta",
+  "first_name" : "exotic",
+  "last_name" : "top",
+  "personalToursList" : [ {
+    "title" : "afdsafdsa",
+    "description" : "fdsafdsa",
+    "price" : 32.0,
+    "capacity" : 432423
+  }, {
+    "title" : "afdsafdsa",
+    "description" : "fdsafdsa",
+    "price" : 32.0,
+    "capacity" : 432423
+  }, {
+    "title" : "fdsafdsa",
+    "description" : "fdasfads",
+    "price" : 32.0,
+    "capacity" : 432423
+  } ]
 } ]

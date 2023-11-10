@@ -432,10 +432,10 @@ public class Controller {
                 orderTour(users);
             }
             case 2 -> {
-                //displayTourOrders(users);
+                displayTourOrders(users);
             }
             case 3 -> {
-                //delUser(users);
+                delUser(users);
             }
             case 4 -> userLogin();
             case 5 -> login();
@@ -480,68 +480,68 @@ public class Controller {
             }
 
 
-
-            }
-
-        }
-        // Method to display all ordered tours for a user
-        public void displayTourOrders (Users user){
-            List<Tours> orderedTours = user.getOrderedTours();
-
-            if (orderedTours.isEmpty()) {
-                System.out.println("No tours ordered.\n");
-            } else {
-                System.out.println("List of Ordered Tours:");
-                for (Tours tour : orderedTours) {
-                    System.out.println("Title: " + tour.getTitle());
-                    System.out.println("Description: " + tour.getDescription());
-                    System.out.println("Price: " + tour.getPrice());
-                    System.out.println("Capacity: " + tour.getCapacity());
-                    System.out.println();
-                }
-            }
-
-            System.out.println("Press <1> to go back");
-            Scanner scanner = new Scanner(System.in);
-
-            while (true) {
-                String input = scanner.nextLine();
-
-                if (input.equals("1")) {
-                    userMenu(user);
-                    break;
-                }
-            }
-            scanner.close();
-        }
-        // Method to delete a user
-        public void delUser(Users user) {
-            ArrayList<Users> allUsers = userRepository.getAllUsers();
-
-            if (allUsers.isEmpty()) {
-                System.out.println("No users available.");
-                adminLogin();
-            }
-
-            System.out.println("Available Users:");
-            for (int i = 0; i < allUsers.size(); i++) {
-                System.out.println((i + 1) + ". " + allUsers.get(i).getUsername());
-            }
-
-            System.out.println("Enter the number of the user to delete (0 to cancel):");
-            int choice = getUserChoice(allUsers.size());
-
-            if (choice > 0) {
-                userRepository.delUser(choice - 1);
-                System.out.println("User deleted.");
-                adminLogin();
-            } else {
-                System.out.println("Operation canceled.");
-                adminLogin();
-            }
         }
 
     }
+
+    // Method to display all ordered tours for a user
+    public void displayTourOrders(Users user) {
+        List<Tours> orderedTours = user.getPersonalToursList();
+
+        if (orderedTours.isEmpty()) {
+            System.out.println("No tours ordered.\n");
+        } else {
+            System.out.println("List of Ordered Tours:");
+            for (Tours tour : orderedTours) {
+                System.out.println("Title: " + tour.getTitle());
+                System.out.println("Description: " + tour.getDescription());
+                System.out.println("Price: " + tour.getPrice());
+                System.out.println("Capacity: " + tour.getCapacity());
+                System.out.println();
+            }
+        }
+
+        System.out.println("Press <1> to go back");
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            String input = scanner.nextLine();
+
+            if (input.equals("1")) {
+                userMenu(user);
+                break;
+            }
+        }
+        scanner.close();
+    }
+
+    // Method to delete a user
+    public void delUser(Users user) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter your username to confirm deletion:");
+        String enteredUsername = scanner.nextLine();
+
+        if (enteredUsername.equals(user.getUsername())) {
+            System.out.println("Are you sure you want to delete your account? (yes/no)");
+            String confirmation = scanner.nextLine().toLowerCase();
+
+            if (confirmation.equals("yes")) {
+                userRepository.deleteUser(user.getUsername());
+                System.out.println("User deleted.");
+                // Perform any additional actions if needed
+            } else {
+                System.out.println("Entered username does not match your account. Operation canceled.");
+                // Handle the situation where the entered username doesn't match the logged-in user
+            }
+
+            // Proceed with the appropriate action (e.g., go back to the menu)
+            userLogin();
+        }
+    }
+
+}
 
 
 

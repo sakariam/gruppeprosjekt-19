@@ -126,7 +126,7 @@ public class UserJSONRepository implements UserRepository {
     }
 
     @Override
-    public List<Users> getAllUsers() {
+    public ArrayList<Users> getAllUsers() {
         return users;
     }
 
