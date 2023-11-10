@@ -12,4 +12,5 @@ public interface UserRepository {
     List<Users> getAllUsers();
     List<Tours> getOrderedTours(Users user);
 
+    void updateUser(Users user);
 }

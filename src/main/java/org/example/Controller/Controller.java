@@ -367,10 +367,8 @@ public class Controller {
         System.out.println("Enter the last name name for the new user");
         String last_name = scanner.nextLine();
 
-        System.out.println("Enter your tours here.");
-        List<Tours> getOrderedTours = scanner.nextLine();
 
-        Users newUsers = new Users(username, first_name, last_name,  List<Tours> getOrderedTours());
+        Users newUsers = new Users(username, first_name, last_name, new ArrayList<>());
         userRepository.addUser(newUsers);
 
         System.out.println("New User added successfully!");
@@ -427,26 +425,30 @@ public class Controller {
 
         //System.out.println("Press <3> to see your balance");
         //System.out.println("Press <4> to add balance");
-            int userChoice = scanner.nextInt();
-            switch (userChoice) {
+        int userChoice = scanner.nextInt();
+        switch (userChoice) {
 
-                case 1 -> { orderTour(users);
-                }
-                case 2 -> { displayTourOrders(users);
-                }
-                case 3 -> { delUser(users);
-                }
-                case 4 -> userLogin();
-                case 5 -> login();
-                case 6 -> {
-
-                    System.out.println("Thank you for choosing us, see you next time !");
-                    scanner.close();
-                    System.exit(0);
-                }
-                default -> System.out.println("Input not recognised, please try again");
+            case 1 -> {
+                orderTour(users);
             }
+            case 2 -> {
+                //displayTourOrders(users);
+            }
+            case 3 -> {
+                //delUser(users);
+            }
+            case 4 -> userLogin();
+            case 5 -> login();
+            case 6 -> {
+
+                System.out.println("Thank you for choosing us, see you next time !");
+                scanner.close();
+                System.exit(0);
+            }
+            default -> System.out.println("Input not recognised, please try again");
         }
+    }
+
     public void orderTour(Users user) {
         Scanner scanner = new Scanner(System.in);
 
@@ -466,17 +468,22 @@ public class Controller {
 
             if (tourChoice >= 1 && tourChoice <= allTours.size()) {
                 Tours selectedTour = allTours.get(tourChoice - 1);
-                user.getOrderedTours().add(selectedTour);
+                user.getPersonalToursList().add(selectedTour);
                 userRepository.updateUser(user);
 
                 System.out.println("Tour ordered successfully!");
                 userMenu(user);
             } else {
                 System.out.println("Invalid choice. Please try again.");
+
                 orderTour(user);
             }
-        }
 
+
+
+            }
+
+        }
         // Method to display all ordered tours for a user
         public void displayTourOrders (Users user){
             List<Tours> orderedTours = user.getOrderedTours();
@@ -535,3 +542,6 @@ public class Controller {
         }
 
     }
+
+
+

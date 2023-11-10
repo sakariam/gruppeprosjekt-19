@@ -133,7 +133,7 @@ public class UserJSONRepository implements UserRepository {
     // New method to get ordered tours for a user
     @Override
     public List<Tours> getOrderedTours(Users user) {
-        return user.getOrderedTours();
+        return getOrderedTours(user);
     }
 
     // New method to update user information

@@ -1,0 +1,11 @@
+[ {
+  "username" : "sakaria",
+  "first_name" : "mohamed",
+  "last_name" : "ole",
+  "personalToursList" : [ {
+    "title" : "afdsafdsa",
+    "description" : "fdsafdsa",
+    "price" : 32.0,
+    "capacity" : 432423
+  } ]
+} ]

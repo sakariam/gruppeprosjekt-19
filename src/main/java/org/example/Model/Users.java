@@ -12,13 +12,14 @@ public class Users {
     private String username;
     private String first_name;
     private String last_name;
-    private List<Tours> getOrderedTours(Users user);
+    private ArrayList<Tours> personalToursList;
 
-    public Users( String username, String first_name, String last_name) {
+
+    public Users( String username, String first_name, String last_name, ArrayList<Tours> personalToursList) {
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
-
+        this.personalToursList= personalToursList;
     }
 
 
@@ -119,6 +120,13 @@ public class Users {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+    public ArrayList<Tours> getPersonalToursList() {
+        return personalToursList;
+    }
+
+    public void setPersonalToursList(ArrayList<Tours> personalToursList) {
+        this.personalToursList = personalToursList;
     }
 
 

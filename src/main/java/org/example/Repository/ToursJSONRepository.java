@@ -88,7 +88,7 @@ public class ToursJSONRepository implements ToursRepository {
 
     @Override
     public List<Tours> getAllTours() {
-        return null;
+        return tours;
     }
 
 }
