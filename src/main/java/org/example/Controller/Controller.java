@@ -525,18 +525,18 @@ public class Controller {
 
         if (enteredUsername.equals(user.getUsername())) {
             System.out.println("Are you sure you want to delete your account? (yes/no)");
+            System.out.println("this is the account your about to delete: " + user.getUsername());
             String confirmation = scanner.nextLine().toLowerCase();
 
             if (confirmation.equals("yes")) {
                 userRepository.deleteUser(user.getUsername());
                 System.out.println("User deleted.");
-                // Perform any additional actions if needed
             } else {
                 System.out.println("Entered username does not match your account. Operation canceled.");
-                // Handle the situation where the entered username doesn't match the logged-in user
+                // checks if it is the same account that you are login in
             }
 
-            // Proceed with the appropriate action (e.g., go back to the menu)
+            // goes back to userlogin
             userLogin();
         }
     }

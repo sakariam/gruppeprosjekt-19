@@ -28,4 +28,9 @@
     "price" : 32.0,
     "capacity" : 432423
   } ]
+}, {
+  "username" : "king1",
+  "first_name" : "zak",
+  "last_name" : "bro",
+  "personalToursList" : [ ]
 } ]
