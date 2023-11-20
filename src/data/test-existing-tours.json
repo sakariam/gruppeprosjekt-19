@@ -1,11 +1,11 @@
 [ {
   "title" : "Moss",
-  "description" : "Tur rundt byen Moss",
+  "description" : "Tur SSrundt byen Moss",
   "price" : 200.0,
   "capacity" : 5
 }, {
   "title" : "Halden",
-  "description" : "Fredriksten festning",
+  "description" : "FredrikstenSS festning",
   "price" : 150.0,
   "capacity" : 15
 } ]

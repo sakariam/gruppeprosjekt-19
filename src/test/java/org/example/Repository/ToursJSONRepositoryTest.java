@@ -22,13 +22,11 @@ class ToursJSONRepositoryTest {
         repository = new ToursJSONRepository(TEST_FILENAME);
     }
 
-    @AfterEach
-    public void tearDown() {
-        repository.clearAllTours();
-    }
+
 
     @Test
     public void testAddTour() {
+        repository = new ToursJSONRepository(TEST_FILENAME);
         Tours testTour = new Tours("Moss", "Tur rundt byen Moss", 200.0, 5);
 
         repository.addTour(testTour);
@@ -64,8 +62,8 @@ class ToursJSONRepositoryTest {
     public void testConstructorWithExistingData() {
         String testFilename = "src/data/test-existing-tours.json";
 
-        Tours tour1 = new Tours("Moss", "Tur rundt byen Moss", 200.0, 5);
-        Tours tour2 = new Tours("Halden", "Fredriksten festning", 150.0, 15);
+        Tours tour1 = new Tours("Moss", "Tur SSrundt byen Moss", 200.0, 5);
+        Tours tour2 = new Tours("Halden", "FredrikstenSS festning", 150.0, 15);
         List<Tours> existingTours = Arrays.asList(tour1, tour2);
 
         ToursJSONRepository.writeToJson(testFilename, existingTours);
@@ -94,5 +92,8 @@ class ToursJSONRepositoryTest {
 
         assertNull(result);
     }
-
+    @AfterEach
+    public void tearDown() {
+        repository.clearAllTours();
+    }
 }
