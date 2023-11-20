@@ -26,7 +26,7 @@ public class ControllerTest {
 
     @Test
     public void testAdminLogin_AddGuide() {
-        String input = "1\nTestUser\nTestDescription\n0\n4\n";
+        String input = "1\n1\nTestDescription\n5\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
@@ -41,7 +41,7 @@ public class ControllerTest {
 
     @Test
     public void testGuideLogin_CreateTour() {
-        String input = "2\n1\nTestTitle\nTestDescription\n10.0\n5\n1\n";
+        String input = "1\n2\nTestTitle\nTestDescription\n10.0\n5\n1\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
