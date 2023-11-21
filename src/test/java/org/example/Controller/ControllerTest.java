@@ -2,6 +2,7 @@ package org.example.Controller;
 import org.example.Model.Guide;
 import org.example.Repository.GuideRepository;
 import org.example.Repository.ToursRepository;
+import org.example.Repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
@@ -17,11 +18,14 @@ public class ControllerTest {
     private GuideRepository guideRepositoryMock;
     private ToursRepository toursRepositoryMock;
 
+    private UserRepository userRepositoryMock;
+
     @BeforeEach
     public void setUp() {
         guideRepositoryMock = mock(GuideRepository.class);
         toursRepositoryMock = mock(ToursRepository.class);
-        controller = new Controller(toursRepositoryMock, guideRepositoryMock);
+        userRepositoryMock =mock(UserRepository.class);
+        controller = new Controller(toursRepositoryMock, guideRepositoryMock,userRepositoryMock);
     }
 
     @Test

@@ -90,10 +90,6 @@ public class ToursJSONRepository implements ToursRepository {
     public List<Tours> getAllTours() {
         return tours;
     }
-    @Override
-    public List<Tours> getAllTours() {
-        return new ArrayList<>(tours);
-    }
 
     public Tours getTour(int index) {
         if (index >= 0 && index < tours.size()) {

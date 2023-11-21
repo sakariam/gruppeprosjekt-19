@@ -13,6 +13,5 @@ public interface ToursRepository {
     void delTour(int index);
     List<Tours> getAllTours();
 
-    List<Tours> getAllTours();
 
 }
