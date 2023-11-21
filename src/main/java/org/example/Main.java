@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.Controller.Controller;
+import org.example.Model.Users;
 import org.example.Repository.*;
 
 public class Main {
@@ -12,7 +13,6 @@ public class Main {
         UserRepository userRepository = new UserJSONRepository("src/data/user.json");
 
         Controller controller = new Controller(toursRepository,guideRepository, userRepository);
-
         controller.login();
     }
 }
