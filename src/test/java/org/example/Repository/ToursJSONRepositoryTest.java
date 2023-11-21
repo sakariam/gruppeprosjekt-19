@@ -14,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ToursJSONRepositoryTest {
 
-    private static final String TEST_FILENAME = "src/data/test-tour.json";
+    private static final String TEST_TOURS = "src/data/test-tour.json";
     private ToursJSONRepository repository;
 
     @BeforeEach
     public void setUp() {
-        repository = new ToursJSONRepository(TEST_FILENAME);
+        repository = new ToursJSONRepository(TEST_TOURS);
     }
 
 
@@ -27,7 +27,7 @@ class ToursJSONRepositoryTest {
     @Ignore
     @Test
     public void testAddTour() {
-        ToursJSONRepository repository = new ToursJSONRepository(TEST_FILENAME);
+        ToursJSONRepository repository = new ToursJSONRepository(TEST_TOURS);
         Tours testTour = new Tours("Moss", "Tur rundt byen Moss", 200.0, 5);
 
         repository.addTour(testTour);
