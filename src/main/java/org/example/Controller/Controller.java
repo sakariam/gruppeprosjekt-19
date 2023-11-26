@@ -411,7 +411,6 @@ public class Controller {
     }
 
     //Menu for users after they log in
-    // TODO: 08.11.2023 Inne i userMenu må du la bruker velge mellom, bestille turer, se turer, slette konto, se beløpet sitt og legge til penger. Alle skal ha sin egen funksjon
     public void userMenu(Users users) {
         Scanner scanner = new Scanner(System.in);
 
