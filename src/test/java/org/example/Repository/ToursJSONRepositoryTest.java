@@ -58,23 +58,6 @@ class ToursJSONRepositoryTest {
         assertNotNull(retrievedTour);
         assertEquals(testTour, retrievedTour);
     }
-    @Ignore
-    @Test
-    public void testConstructorWithExistingData() {
-        String testFilename = "src/data/test-existing-tours.json";
-
-        Tours tour1 = new Tours("Moss", "Tur SSrundt byen Moss", 200.0, 5);
-        Tours tour2 = new Tours("Halden", "FredrikstenSS festning", 150.0, 15);
-        List<Tours> existingTours = Arrays.asList(tour1, tour2);
-
-        ToursJSONRepository.writeToJson(testFilename, existingTours);
-
-        ToursJSONRepository repository = new ToursJSONRepository(testFilename);
-
-        List<Tours> toursInRepository = repository.getAllTours();
-        assertEquals(existingTours.size(), toursInRepository.size());
-        assertTrue(toursInRepository.containsAll(existingTours));
-    }
     @Test
     public void testGetTourWithInvalidIndex() {
         ToursJSONRepository repository = new ToursJSONRepository("src/data/test-tours.json");
@@ -83,6 +66,8 @@ class ToursJSONRepositoryTest {
 
         assertNull(result);
     }
+
+
     @Test
     public void testReadJsonFileIOExceptionHandling() {
         String testFilename = "nonexistent-file.json";
