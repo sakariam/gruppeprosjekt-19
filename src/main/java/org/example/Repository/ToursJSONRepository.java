@@ -91,4 +91,15 @@ public class ToursJSONRepository implements ToursRepository {
         return tours;
     }
 
+    public Tours getTour(int index) {
+        if (index >= 0 && index < tours.size()) {
+            return tours.get(index);
+        }
+        return null;
+    }
+
+    public void clearAllTours() {
+        tours.clear();
+        writeToJson(filename, tours);
+    }
 }
