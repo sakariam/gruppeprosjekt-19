@@ -25,7 +25,6 @@ public class Users {
 
 
 
-
         public String makeProfile () {
 
             String profile = "Username: " + username + "\n";
