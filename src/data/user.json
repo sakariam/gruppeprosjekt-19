@@ -18,4 +18,9 @@
     "price" : 299.0,
     "capacity" : 5
   } ]
+}, {
+  "username" : "sakari",
+  "first_name" : "sak",
+  "last_name" : "er",
+  "personalToursList" : [ ]
 } ]

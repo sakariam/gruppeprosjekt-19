@@ -7,7 +7,8 @@ import java.util.List;
 public interface UserRepository {
     void addUser(Users user);
     void deleteUser(String username);
-    String purchaseBooking();
+    String purchaseBooking();  // this is our first try at making purchasing booking
+                               // it is a different method to order tour in controller
     Users getUser(String username);
     List<Users> getAllUsers();
     List<Tours> getOrderedTours(Users user);
