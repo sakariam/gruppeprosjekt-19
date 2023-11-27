@@ -64,5 +64,5 @@ Når det kreves at brukeren skal legge inn et tall. F.eks når du skal legge inn
 Når brukeren skriver inn data så vil ikke noe bli lagret før all dataen som kreves blir lagt inn. Om vi hadde hatt en nettside så kunne vi brukt javascript og localstorage for å jevnlig lagre data inne i serveren eller lokal lagring for å unngå at brukeren mister det de har skrevet.
 
 ### 7.6.4 Testing
-Vi støttet på en del problemer når det kommer til testing. Testing av Controller-klassen ble vanskelig å få til ettersom inputen ikke klarte å få med seg all data slik at testingen kunne fullføres. En mulig løsning på dette kunne ha vært å ha lagd en instansvariabel for scanner og bare ha en scanner, men dette fikk vi ikke til. Vi har kommentert ut to filer der vi forsøker å teste, men feiler. 
+Vi støttet på en del problemer når det kommer til testing. Testing av Controller-klassen ble vanskelig å få til ettersom inputen ikke klarte å få med seg all data slik at testingen kunne fullføres. En mulig løsning på dette kunne ha vært å ha lagd en instansvariabel for scanner og bare ha en scanner, men dette fikk vi ikke til. Vi har kommentert ut to filer der vi forsøker å teste, men feiler. Vi fikk ikke til å teste userJsonRepository siden userRepository testene brukte vi svært langt tid på løse. 
 
