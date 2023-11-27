@@ -7,7 +7,7 @@ public class Tours {
 
     private int capacity;
 
-
+    //Constructors
     public Tours() {
     }
 
@@ -25,7 +25,7 @@ public class Tours {
         return "Tour title:" + title + "\nDescription: " + description + "\nPrice: " + price + "kr"; //+ guide.getName() Add this after we add getName in Guide class
     }
 
-
+    //Getters and setters
     public String getTitle() {
         return title;
     }

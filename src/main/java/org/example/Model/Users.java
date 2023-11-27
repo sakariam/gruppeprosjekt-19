@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 
 
-// TODO: 26.09.2023 Lag constructer, getters og setters etter alle variablene: Done
 public class Users {
     private String username;
     private String first_name;
@@ -22,10 +21,9 @@ public class Users {
         this.personalToursList= personalToursList;
     }
 
-
-
-
-        public String makeProfile () {
+    public Users() {
+    }
+    public String makeProfile () {
 
             String profile = "Username: " + username + "\n";
             profile += "first-name: " + first_name + "\n";

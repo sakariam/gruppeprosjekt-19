@@ -1,25 +1,26 @@
 package org.example.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Guide {
 
     private String name;
     private String description;
     private ArrayList<Tours> TourGuides;
 
-
-// TODO: 26.09.2023 Lag constructer, getters og setters etter alle variablene
+    //Constructor
     public Guide() {
 
     }
-
     public Guide(String name, String description, ArrayList<Tours> tourGuides) {
         this.name = name;
         this.description = description;
         this.TourGuides = tourGuides;
 
     }
-
+    //Getters amd setters
     public String getName() {
         return name;
     }

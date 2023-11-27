@@ -1,41 +1,21 @@
 [ {
-  "username" : "sakaria",
-  "first_name" : "mohamed",
-  "last_name" : "ole",
+  "username" : "Tim_Man",
+  "first_name" : "Tim",
+  "last_name" : "Kirknes",
   "personalToursList" : [ {
-    "title" : "afdsafdsa",
-    "description" : "fdsafdsa",
-    "price" : 32.0,
-    "capacity" : 432423
+    "title" : "Mount Galdhøpiggen",
+    "description" : "An intermediate mountain tour",
+    "price" : 299.0,
+    "capacity" : 5
   } ]
 }, {
-  "username" : "fanta",
-  "first_name" : "exotic",
-  "last_name" : "top",
+  "username" : "Michelle_Li",
+  "first_name" : "Michelle",
+  "last_name" : "Linge",
   "personalToursList" : [ {
-    "title" : "afdsafdsa",
-    "description" : "fdsafdsa",
-    "price" : 32.0,
-    "capacity" : 432423
-  }, {
-    "title" : "afdsafdsa",
-    "description" : "fdsafdsa",
-    "price" : 32.0,
-    "capacity" : 432423
-  }, {
-    "title" : "fdsafdsa",
-    "description" : "fdasfads",
-    "price" : 32.0,
-    "capacity" : 432423
-  }, {
-    "title" : "afdsafdsa",
-    "description" : "fdsafdsa",
-    "price" : 32.0,
-    "capacity" : 432423
+    "title" : "Mount Galdhøpiggen",
+    "description" : "An intermediate mountain tour",
+    "price" : 299.0,
+    "capacity" : 5
   } ]
-}, {
-  "username" : "king1",
-  "first_name" : "zak",
-  "last_name" : "bro",
-  "personalToursList" : [ ]
 } ]
