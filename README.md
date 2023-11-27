@@ -9,6 +9,8 @@ Prototypen vår er brukervennlig, hvor du får utskrift av hva som trengs fra br
 
 For å først starte programmet må du gå til Main og kjøre programmet, og under går vi gjennom hvordan programmet fungerer. 
 
+For å kjøre testene må du gå til test-mappen og høyreklikke på java-mappen. Deretter velger du Run ‘Tests in java’.
+
 
 ## 7.1 Systemarkitektur 
 
