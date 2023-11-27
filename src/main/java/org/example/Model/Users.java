@@ -121,6 +121,17 @@ public class Users {
             this.personalToursList = personalToursList;
         }
 
+
+    @Override
+    public String toString() {
+        return "Users{"
+                + "firstName='" + first_name + '\''
+                + ", lastName='" + last_name + '\''
+                + ", Username='" + username + '\''
+                + ", tours=" + personalToursList
+                + '}';
+    }
+
     }
 
 
